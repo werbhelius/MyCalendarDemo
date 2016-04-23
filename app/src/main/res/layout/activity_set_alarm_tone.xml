@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/left_alarm_tone_back"
+            style="@style/imageButtonStyleTwo"
+            android:src="@drawable/ic_keyboard_backspace_white_24dp" />
+
+        <TextView
+            style="@style/ActivityTitleStyle"
+            android:text="铃声" />
+
+        <TextView
+            android:id="@+id/tv_save"
+            style="@style/leftTextViewStyle"
+            android:text="保存"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/tone_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+</LinearLayout>

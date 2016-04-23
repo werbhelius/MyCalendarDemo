@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.werb.mycalendardemo" >
+
+    <uses-permission android:name="android.permission.VIBRATE"/>
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+    <application
+        android:allowBackup="true"
+        android:name=".MyApplication"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme" >
+        <activity android:name=".MainActivity"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".AddScheduleActivity"/>
+        <activity android:name=".alarmsetactivity.SetRePlayActivity"/>
+        <activity android:name=".alarmsetactivity.SetAlarmTimeActivity"/>
+        <activity android:name=".alarmsetactivity.SetLocalActivity"/>
+        <activity android:name=".alarmsetactivity.SetColorActivity"/>
+        <activity android:name=".alarmsetactivity.SetAlarmToneActivity"/>
+        <activity android:name=".ScheduleDetailActivity"/>
+
+        <activity android:name=".AlarmRemindActivity"/>
+
+        <service android:name=".alarmremind.AlarmService"
+            android:process="com.werb.mycalendardemo.serviceProcess"
+            android:icon="@mipmap/ic_launcher"
+            android:label="@string/app_name">
+
+        </service>
+
+        <receiver android:name=".alarmremind.AlarmServiceBroadcastReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <receiver android:name=".alarmremind.AlarmAlertBroadcastReceiver">
+        </receiver>
+
+    </application>
+
+</manifest>

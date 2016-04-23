@@ -1,0 +1,67 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <!-- Calendar styles -->
+    <style name="CalendarCellText">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:textColor">@color/calendar_text_default</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">@dimen/text_day_size</item>
+    </style>
+
+    <!-- left imageButton Style three-->
+    <style name="imageButtonStyle">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <!-- Activity center Title Style three-->
+    <style name="ActivityTitleStyle">
+        <item name="android:layout_width">270dp</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:paddingLeft">50dp</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:textSize">18dp</item>
+    </style>
+
+    <!-- left imageButton Style two-->
+    <style name="imageButtonStyleTwo">
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_width">50dp</item>
+        <item name="android:background">@null</item>
+    </style>
+
+    <!-- Activity center Title Style Two-->
+    <style name="ActivityTitleStyleTwo">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">18dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:paddingLeft">60dp</item>
+    </style>
+
+    <!-- right TextView Style -->
+    <style name="leftTextViewStyle">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">13dp</item>
+        <item name="android:gravity">center</item>
+    </style>
+</resources>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--AgendaListView 中用于顶靠的顶部布局 AgendaHeaderView-->
+<com.werb.mycalendardemo.customview.agenda.AgendaHeaderView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp">
+
+        <!-- 用于突出日期的圆环 -->
+        <View
+            android:id="@+id/view_day_circle_selected"
+            android:layout_width="@dimen/circle_day_size"
+            android:layout_height="@dimen/circle_day_size"
+            android:background="@drawable/current_color_circle"
+            android:visibility="invisible"/>
+
+        <LinearLayout
+            android:id="@+id/day_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:orientation="vertical">
+
+            <!-- 日期-->
+            <TextView
+                android:id="@+id/view_agenda_day_of_month"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="5dp"
+                android:textSize="20dp" />
+
+            <!-- 星期-->
+            <TextView
+                android:id="@+id/view_agenda_day_of_week"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="5dp"
+                android:textSize="10dp" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</com.werb.mycalendardemo.customview.agenda.AgendaHeaderView>

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@color/colorPrimary"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/left_local_back"
+            style="@style/imageButtonStyleTwo"
+            android:src="@drawable/ic_keyboard_backspace_white_24dp" />
+        <TextView
+            style="@style/ActivityTitleStyle"
+            android:text="地点"/>
+
+        <TextView
+            android:id="@+id/tv_save"
+            style="@style/leftTextViewStyle"
+            android:text="保存"/>
+
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#f2f2f2">
+
+        <ImageView
+            android:id="@+id/iv_local"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_location_on_grey_600_24dp"/>
+
+        <EditText
+            android:id="@+id/ed_local"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="请输入地址"
+            android:paddingLeft="50dp"
+            android:background="@null"/>
+
+    </RelativeLayout>
+</LinearLayout>
