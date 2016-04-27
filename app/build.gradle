@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.werb.mycalendardemo"
         minSdkVersion 19
-        targetSdkVersion 23
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
@@ -42,4 +42,11 @@ dependencies {
     compile 'com.github.wangjiegulu:AndroidBucket:1.0.4'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'com.android.support:recyclerview-v7:23.2.1'
+    //网络框架 volley retrofit
+    compile 'com.mcxiaoke.volley:library:1.0.19'
+    compile 'com.squareup.retrofit2:retrofit:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
+    //加载图片
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }

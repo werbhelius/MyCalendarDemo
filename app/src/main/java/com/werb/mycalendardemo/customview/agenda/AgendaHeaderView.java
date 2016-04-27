@@ -61,6 +61,7 @@ public class AgendaHeaderView extends LinearLayout {
         TextView txtDayOfWeek = (TextView) findViewById(R.id.view_agenda_day_of_week);
         View circleView = findViewById(R.id.view_day_circle_selected);
 
+        //得到今天
         Calendar today = CalendarManager.getInstance().getToday();
 
         //设置星期格式
@@ -86,6 +87,5 @@ public class AgendaHeaderView extends LinearLayout {
         txtDayOfMonth.setText(String.valueOf(day.get(Calendar.DAY_OF_MONTH)));
         txtDayOfWeek.setText(dayWeekFormatter.format(day.getTime()));
     }
-
     // endregion
 }
