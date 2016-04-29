@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--AgendaListView 中用于顶靠的顶部布局 AgendaHeaderView-->
 <com.werb.mycalendardemo.customview.agenda.AgendaHeaderView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/header_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">

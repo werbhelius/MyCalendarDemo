@@ -10,18 +10,20 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/icon"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name=".SplashActivity">
+        <activity android:name=".SplashActivity"
+            android:theme="@style/FullWindows">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".GuideActivity"/>
+        <activity android:name=".GuideActivity"
+            android:theme="@style/FullWindows"/>
         <activity android:name=".MainActivity"
             android:launchMode="singleTask">
         </activity>

@@ -8,6 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <!-- Base application theme. -->
+    <style name="FullWindows" parent="Theme.AppCompat.Light.NoActionBar">
+       <item name="android:windowFullscreen">true</item>
+    </style>
+
     <!--&lt;!&ndash;&lt;!&ndash;在style属性中配置android:windowLightStatusBar&ndash;&gt;&ndash;&gt;-->
     <!--&lt;!&ndash;&lt;!&ndash;即可， 设置为true时，当statusbar的背景颜色为淡色时，statusbar的文字颜色会变成灰色，为false时同理。&ndash;&gt;&ndash;&gt;-->
 

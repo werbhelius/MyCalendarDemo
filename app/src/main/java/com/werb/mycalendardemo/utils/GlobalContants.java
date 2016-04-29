@@ -6,5 +6,5 @@ package com.werb.mycalendardemo.utils;
  */
 public class GlobalContants {
 
-    public static final String SERVER_URL="http://169.254.44.73/calendar/";
+    public static final String SERVER_URL="http://10.1.1.237/calendar/";
 }

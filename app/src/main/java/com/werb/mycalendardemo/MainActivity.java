@@ -28,6 +28,7 @@ import com.werb.mycalendardemo.models.CalendarEvent;
 import com.werb.mycalendardemo.pager.HomePager;
 import com.werb.mycalendardemo.utils.BusProvider;
 import com.werb.mycalendardemo.utils.CalendarManager;
+import com.werb.mycalendardemo.utils.ColorUtils;
 import com.werb.mycalendardemo.utils.Events;
 
 import java.text.SimpleDateFormat;
@@ -266,30 +267,7 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
                 isAllday = false;
             }
 
-            int colorId = 0;
-            switch (bean.getAlarmColor()) {
-                case "默认颜色":
-                    colorId = R.color.moren;
-                    break;
-                case "罗勒绿":
-                    colorId = R.color.luolelv;
-                    break;
-                case "耀眼黄":
-                    colorId = R.color.yaoyanhuang;
-                    break;
-                case "番茄红":
-                    colorId = R.color.fanqiehong;
-                    break;
-                case "低调灰":
-                    colorId = R.color.didiaohui;
-                    break;
-                case "橘子红":
-                    colorId = R.color.juzihong;
-                    break;
-                case "深空蓝":
-                    colorId = R.color.shenkonglan;
-                    break;
-            }
+            int colorId = ColorUtils.getColorFromStr(bean.getAlarmColor());
 
             Calendar startCalendar = Calendar.getInstance();
             startCalendar.set(Calendar.HOUR_OF_DAY, bean.getStartTimeHour());

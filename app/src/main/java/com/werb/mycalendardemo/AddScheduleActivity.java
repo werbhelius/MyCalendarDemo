@@ -5,13 +5,16 @@ import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.Window;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.TimePicker;
@@ -24,6 +27,7 @@ import com.werb.mycalendardemo.alarmsetactivity.SetColorActivity;
 import com.werb.mycalendardemo.alarmsetactivity.SetLocalActivity;
 import com.werb.mycalendardemo.alarmsetactivity.SetRePlayActivity;
 import com.werb.mycalendardemo.database.AlarmDBSupport;
+import com.werb.mycalendardemo.utils.ColorUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -45,15 +49,26 @@ public class AddScheduleActivity extends AppCompatActivity {
     private AlarmDBSupport support;
     private int id;
 
-    @Bind(R.id.alarm_title) EditText alarm_title;
-    @Bind(R.id.alarm_description) EditText alarm_description;
-    @Bind(R.id.alarm_replay) TextView alarm_replay;
-    @Bind((R.id.alarm_remind)) TextView alarm_remind;
-    @Bind(R.id.alarm_local) TextView alarm_local;
-    @Bind(R.id.alarm_color) TextView alarm_color;
-    @Bind(R.id.alarm_tone_Path) TextView alarm_tone_Path;
-    @Bind(R.id.alarm_date) TextView alarm_date;
-    @Bind(R.id.insert_update_title) TextView insert_update_title;
+    @Bind(R.id.alarm_title)
+    EditText alarm_title;
+    @Bind(R.id.alarm_description)
+    EditText alarm_description;
+    @Bind(R.id.alarm_replay)
+    TextView alarm_replay;
+    @Bind((R.id.alarm_remind))
+    TextView alarm_remind;
+    @Bind(R.id.alarm_local)
+    TextView alarm_local;
+    @Bind(R.id.alarm_color)
+    TextView alarm_color;
+    @Bind(R.id.alarm_tone_Path)
+    TextView alarm_tone_Path;
+    @Bind(R.id.alarm_date)
+    TextView alarm_date;
+    @Bind(R.id.insert_update_title)
+    TextView insert_update_title;
+    @Bind(R.id.action_bar)
+    LinearLayout action_bar;
 
     @OnClick(R.id.alarm_date)
     void openDatePicker() {
@@ -80,8 +95,8 @@ public class AddScheduleActivity extends AppCompatActivity {
     }
 
     @OnClick(R.id.left_clear)
-    void clear(){
-        startActivity(new Intent(this,MainActivity.class));
+    void clear() {
+        startActivity(new Intent(this, MainActivity.class));
         finish();
     }
 
@@ -112,6 +127,7 @@ public class AddScheduleActivity extends AppCompatActivity {
 
     @Bind(R.id.sw_all_day)
     Switch sw_all_day;
+
     @OnClick(R.id.sw_all_day)
     void allday() {
         if (!isAllDay) {
@@ -127,14 +143,16 @@ public class AddScheduleActivity extends AppCompatActivity {
 
     @Bind(R.id.sw_vibrate)
     Switch sw_vibrate;
-    @OnClick(R.id.sw_vibrate) void is_Vibrate(){
+
+    @OnClick(R.id.sw_vibrate)
+    void is_Vibrate() {
         Vibrator vibrator;
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
-        if(!isVibrate){
+        if (!isVibrate) {
             alarmBean.setIsVibrate(1);
             vibrator.vibrate(500);
             isVibrate = true;
-        }else {
+        } else {
             alarmBean.setIsVibrate(0);
             vibrator.cancel();
             isVibrate = false;
@@ -174,20 +192,20 @@ public class AddScheduleActivity extends AppCompatActivity {
         }
 
         //设置年月日
-        if(alarm_date.getText().toString().equals("选择活动日期")){
+        if (alarm_date.getText().toString().equals("选择活动日期")) {
             alarmBean.setYear(getToDay().get(Calendar.YEAR));
             alarmBean.setMonth(getToDay().get(Calendar.MONTH));
             alarmBean.setDay(getToDay().get(Calendar.DAY_OF_MONTH));
         }
 
         //设置开始时间
-        if(alarm_start_time.getText().toString().equals("选择开始时间")){
+        if (alarm_start_time.getText().toString().equals("选择开始时间")) {
             alarmBean.setStartTimeHour(getToDay().get(Calendar.HOUR_OF_DAY));
             alarmBean.setStartTimeMinute(getToDay().get(Calendar.MINUTE));
         }
 
         //设置结束时间
-        if(alarm_end_time.getText().toString().equals("选择结束时间")){
+        if (alarm_end_time.getText().toString().equals("选择结束时间")) {
             alarmBean.setEndTimeHour(getToDay().get(Calendar.HOUR_OF_DAY) + 1);
             alarmBean.setEndTimeMinute(getToDay().get(Calendar.MINUTE));
         }
@@ -195,19 +213,19 @@ public class AddScheduleActivity extends AppCompatActivity {
         //设置提醒时间
         if (alarm_remind.getText().toString().equals("选择提醒时间")) {
             alarmBean.setAlarmTime("无");
-        }else {
+        } else {
             alarmBean.setAlarmTime(alarm_remind.getText().toString());
         }
 
         //设置重复天
         if (alarm_replay.getText().toString().equals("不重复")) {
             alarmBean.setReplay("不重复");
-        }else {
+        } else {
             alarmBean.setReplay(alarm_replay.getText().toString());
         }
 
         //设置铃声
-        if(alarm_tone_Path.getText().toString().equals("选择铃声")){
+        if (alarm_tone_Path.getText().toString().equals("选择铃声")) {
             Uri uri = RingtoneManager.getActualDefaultRingtoneUri(
                     AddScheduleActivity.this, RingtoneManager.TYPE_RINGTONE);
             alarmBean.setAlarmTonePath(uri.toString());
@@ -216,33 +234,33 @@ public class AddScheduleActivity extends AppCompatActivity {
         //设置颜色
         if (alarm_color.getText().toString().equals("默认颜色")) {
             alarmBean.setAlarmColor("默认颜色");
-        }else {
+        } else {
             alarmBean.setAlarmColor(alarm_color.getText().toString());
         }
 
         //设置地区
-        if(alarm_local.getText().toString().equals("暂无地点")){
+        if (alarm_local.getText().toString().equals("暂无地点")) {
             alarmBean.setLocal("暂无地点");
-        }else {
+        } else {
             alarmBean.setLocal(alarm_local.getText().toString());
         }
 
-        if(id==0){
+        if (id == 0) {
             System.out.println("保存的数据:" + alarmBean.toString());
             support.insertAlarmDate(alarmBean);
 
             SendAlarmBroadcast.startAlarmService(this);
 
-            Toast.makeText(this,"添加成功！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "添加成功！", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, MainActivity.class));
             finish();
-        }else {
+        } else {
             System.out.println("更新的数据:" + alarmBean.toString());
             support.updateDataById(id, alarmBean);
 
             SendAlarmBroadcast.startAlarmService(this);
 
-            Toast.makeText(this,"更新成功！",Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "更新成功！", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(this, MainActivity.class));
             finish();
         }
@@ -257,7 +275,7 @@ public class AddScheduleActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         support = new AlarmDBSupport(getApplicationContext());
-        if(getIntent().getStringExtra("type").equals("DetailToAdd")){
+        if (getIntent().getStringExtra("type").equals("DetailToAdd")) {
             Intent intent = getIntent();
             AlarmBean bean = (AlarmBean) intent.getSerializableExtra("AlarmBean");
             id = bean.getId();
@@ -268,7 +286,14 @@ public class AddScheduleActivity extends AppCompatActivity {
             alarm_local.setText(bean.getLocal());
             alarm_replay.setText(bean.getReplay());
             insert_update_title.setText("修改活动");
-        }else {
+            //动态改变颜色
+            int colorId = ColorUtils.getColorFromStr(bean.getAlarmColor());
+            action_bar.setBackgroundColor(getResources().getColor(colorId));
+            Window window = getWindow();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                window.setStatusBarColor(getResources().getColor(colorId));
+            }
+        } else {
             insert_update_title.setText("新建活动");
         }
     }
@@ -378,9 +403,17 @@ public class AddScheduleActivity extends AppCompatActivity {
                 if (data != null) {
                     alarm_color.setText(data.getStringExtra("color"));
                     alarmBean.setAlarmColor(data.getStringExtra("color"));
+                    //动态改变颜色
+                    int colorId = ColorUtils.getColorFromStr(data.getStringExtra("color"));
+                    action_bar.setBackgroundColor(getResources().getColor(colorId));
+                    Window window = getWindow();
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                        window.setStatusBarColor(getResources().getColor(colorId));
+                    }
+
                 }
             }
-        }else if (requestCode == 4) {
+        } else if (requestCode == 4) {
             if (resultCode == 4) {
                 if (data != null) {
                     alarm_tone_Path.setText(data.getStringExtra("tone"));

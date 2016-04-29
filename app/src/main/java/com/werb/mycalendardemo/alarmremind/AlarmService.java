@@ -30,6 +30,10 @@ public class AlarmService extends Service {
         return null;
     }
 
+    /**
+     * 得到下一条提醒的日程信息
+     * @return
+     */
     private AlarmBean getNext() {
 
         support = new AlarmDBSupport(getApplicationContext());

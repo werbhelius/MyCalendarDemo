@@ -36,6 +36,7 @@ public class AgendaAdapter extends BaseAdapter implements StickyListHeadersAdapt
     // 构造方法
     public AgendaAdapter(int currentDayTextColor) {
         this.mCurrentDayColor = currentDayTextColor;
+        System.out.println("AgendaAdapter--1");
     }
 
     // endregion

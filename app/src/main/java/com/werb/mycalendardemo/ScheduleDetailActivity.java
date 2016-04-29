@@ -3,14 +3,18 @@ package com.werb.mycalendardemo;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Window;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.werb.mycalendardemo.alarmremind.SendAlarmBroadcast;
 import com.werb.mycalendardemo.database.AlarmDBSupport;
+import com.werb.mycalendardemo.utils.ColorUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -31,6 +35,8 @@ public class ScheduleDetailActivity extends AppCompatActivity {
     @Bind(R.id.detail_alarm_remind) TextView detail_alarm_remind;
     @Bind(R.id.detail_alarm_local) TextView detail_alarm_local;
     @Bind(R.id.detail_alarm_description) TextView detail_alarm_description;
+    @Bind(R.id.detail_layout)
+    RelativeLayout detail_layout;
 
     //删除
     @OnClick(R.id.tv_delete)
@@ -84,6 +90,13 @@ public class ScheduleDetailActivity extends AppCompatActivity {
         detail_alarm_remind.setText(bean.getAlarmTime());
         detail_alarm_local.setText(bean.getLocal());
         detail_alarm_description.setText(bean.getDescription());
+
+        int colorId = ColorUtils.getColorFromStr(bean.getAlarmColor());
+        detail_layout.setBackgroundColor(getResources().getColor(colorId));
+        Window window = getWindow();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            window.setStatusBarColor(getResources().getColor(colorId));
+        }
 
     }
 

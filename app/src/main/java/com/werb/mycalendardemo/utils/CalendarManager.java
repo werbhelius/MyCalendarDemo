@@ -174,7 +174,6 @@ public class CalendarManager {
         if (locale == null) {
             throw new IllegalArgumentException("Locale is null.");
         }
-
         //构建基本的Calendar
         setLocale(locale);
 
@@ -342,6 +341,17 @@ public class CalendarManager {
     private MonthItem getLastMonth() {
         System.out.println("Months().size()=" + getMonths().size());
         return getMonths().get(getMonths().size()-1);
+    }
+
+    public List<Calendar> getFirstDayOfMonth(){
+        List<Calendar> list = new ArrayList<>();
+        Calendar calendar = Calendar.getInstance();
+        for(int i=0;i<12;i++){
+            calendar.set(Calendar.DAY_OF_MONTH,1);
+            calendar.set(Calendar.MONTH,i);
+            list.add(calendar);
+        }
+        return list;
     }
 
 
