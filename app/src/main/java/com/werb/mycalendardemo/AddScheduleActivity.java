@@ -212,7 +212,7 @@ public class AddScheduleActivity extends AppCompatActivity {
 
         //设置提醒时间
         if (alarm_remind.getText().toString().equals("选择提醒时间")) {
-            alarmBean.setAlarmTime("无");
+            alarmBean.setAlarmTime("默认");
         } else {
             alarmBean.setAlarmTime(alarm_remind.getText().toString());
         }
@@ -422,5 +422,11 @@ public class AddScheduleActivity extends AppCompatActivity {
             }
         }
         super.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,MainActivity.class));
+        finish();
     }
 }

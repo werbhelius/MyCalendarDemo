@@ -85,7 +85,7 @@ public class ScheduleDetailActivity extends AppCompatActivity {
         SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日  EE");
         //匹配数据
         detail_alarm_title.setText(bean.getTitle());
-        detail_alarm_date.setText(df.format(calendar.getTime()));
+        detail_alarm_date.setText(df.format(calendar.getTime())+"  本月第"+calendar.get(Calendar.WEEK_OF_MONTH)+"周");
         buildStartEndTime(bean.getStartTimeHour(), bean.getStartTimeMinute(), bean.getEndTimeHour(), bean.getEndTimeMinute());
         detail_alarm_remind.setText(bean.getAlarmTime());
         detail_alarm_local.setText(bean.getLocal());
@@ -159,5 +159,11 @@ public class ScheduleDetailActivity extends AppCompatActivity {
 
         //参数都设置完成了，创建并显示出来
         builder.create().show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,MainActivity.class));
+        finish();
     }
 }
