@@ -141,7 +141,7 @@ public class ScheduleDetailActivity extends AppCompatActivity {
     private void dialog() {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);  //先得到构造器
         builder.setTitle("确定要删除吗？"); //设置标题
-        builder.setIcon(R.mipmap.ic_launcher);//设置图标，图片id即可
+        builder.setIcon(R.mipmap.icon);//设置图标，图片id即可
         builder.setPositiveButton("确定", new DialogInterface.OnClickListener() { //设置确定按钮
             @Override
             public void onClick(DialogInterface dialog, int which) {

@@ -10,15 +10,14 @@
 
    <TextView
        android:id="@+id/start"
-       android:layout_width="200dp"
+       android:layout_width="match_parent"
        android:layout_height="50dp"
-       android:textSize="18sp"
-       android:textColor="#0564fc"
+       android:background="#0091ea"
+       android:textSize="16sp"
+       android:textColor="#fff"
        android:gravity="center"
        android:text="Start to experience ...."
        android:visibility="invisible"
        android:layout_alignParentBottom="true"
-       android:layout_centerHorizontal="true"
-       android:layout_marginBottom="20dp" />
-
+       android:layout_centerHorizontal="true"/>
 </RelativeLayout>

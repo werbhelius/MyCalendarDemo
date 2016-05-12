@@ -8,7 +8,7 @@ android {
     defaultConfig {
         applicationId "com.werb.mycalendardemo"
         minSdkVersion 19
-        targetSdkVersion 22
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }

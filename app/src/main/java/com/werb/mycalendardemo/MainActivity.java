@@ -1,7 +1,12 @@
 package com.werb.mycalendardemo;
 
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
@@ -30,6 +35,7 @@ import com.werb.mycalendardemo.utils.BusProvider;
 import com.werb.mycalendardemo.utils.CalendarManager;
 import com.werb.mycalendardemo.utils.ColorUtils;
 import com.werb.mycalendardemo.utils.Events;
+import com.werb.mycalendardemo.utils.PrefUtils;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -100,6 +106,7 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
 
     private HomePager homePager;
     private AlarmDBSupport support;
+    private boolean isAllowAlert = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,8 +128,43 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
         System.out.println("---onCreate---" + eventList.size());
         homePager.initData(eventList);
 
-        SendAlarmBroadcast.startAlarmService(this);
+
+        //弹窗权限验证
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.M) {
+            isAllowAlert = PrefUtils.getBoolean(this,"isAllowAlert",false);
+            if(!isAllowAlert){
+                showPermissionDialog();
+            }
+        }else {
+            SendAlarmBroadcast.startAlarmService(this);
+        }
+
     }
+
+    //权限申请相关方法
+    private static final int REQUEST_CODE = 1;
+    @TargetApi(Build.VERSION_CODES.M)
+    private void requestAlertWindowPermission() {
+        Intent intent = new Intent(Settings.ACTION_MANAGE_OVERLAY_PERMISSION);
+        intent.setData(Uri.parse("package:" + getPackageName()));
+        startActivityForResult(intent, REQUEST_CODE);
+    }
+
+    /**
+     * 权限申请弹窗
+     */
+    private void showPermissionDialog(){
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+        builder.setTitle("弹窗需要开启权限哦~")
+                .setPositiveButton("开启", (dialog, which) -> {
+                    requestAlertWindowPermission();
+                })
+                .setNegativeButton("取消", (dialog, which) -> {
+
+                });
+        builder.create().show();
+    }
+
 
     /**
      * 初始化布局
@@ -230,6 +272,19 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
         support.deactivate();
     }
 
+    @TargetApi(Build.VERSION_CODES.M)
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == REQUEST_CODE) {
+            if (Settings.canDrawOverlays(this)) {
+                Toast.makeText(this,"弹窗权限开启！",Toast.LENGTH_SHORT).show();
+                PrefUtils.setBoolean(MainActivity.this, "isAllowAlert", true);
+            }else {
+                PrefUtils.setBoolean(MainActivity.this, "isAllowAlert", false);
+            }
+        }
+    }
 
 
     /**
@@ -278,8 +333,8 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
 
             SimpleDateFormat df = new SimpleDateFormat("HH:mm");
             String startTime = df.format(startCalendar.getTime());
-            String endtTime = df.format(endCalendar.getTime());
-            String startAndEndTime = startTime + "-" + endtTime;
+            String endTime = df.format(endCalendar.getTime());
+            String startAndEndTime = startTime + "-" + endTime;
 
             BaseCalendarEvent event1 = new BaseCalendarEvent(bean.getId(),bean.getTitle(), bean.getDescription(), bean.getLocal(),
                     ContextCompat.getColor(this, colorId), startTime1, endTime1, isAllday, startAndEndTime);

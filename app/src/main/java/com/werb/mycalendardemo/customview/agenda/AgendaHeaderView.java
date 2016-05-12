@@ -113,9 +113,9 @@ public class AgendaHeaderView extends LinearLayout {
 
         //如果当前日期为today,则显示circleView,同时设置circleView的颜色粗细,否则就隐藏circleView
         if (DateHelper.sameDate(day, today)) {
-            txtDayOfMonth.setTextColor(currentDayTextColor);
-            txtDayOfWeek.setTextColor(currentDayTextColor);
-            circleView.setVisibility(VISIBLE);
+            txtDayOfMonth.setTextColor(getResources().getColor(R.color.calendar_circle_current_color));
+            txtDayOfWeek.setTextColor(getResources().getColor(R.color.calendar_circle_current_color));
+//            circleView.setVisibility(VISIBLE);
         } else {
             circleView.setVisibility(INVISIBLE);
         }

@@ -36,7 +36,7 @@
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_weight">1</item>
         <item name="android:layout_gravity">center_vertical</item>
-        <item name="android:background">@null</item>
+        <item name="android:background">@drawable/icon_bg</item>
     </style>
 
     <!-- Activity center Title Style three-->
@@ -54,7 +54,7 @@
     <style name="imageButtonStyleTwo">
         <item name="android:layout_height">match_parent</item>
         <item name="android:layout_width">50dp</item>
-        <item name="android:background">@null</item>
+        <item name="android:background">@drawable/icon_bg</item>
     </style>
 
     <!-- Activity center Title Style Two-->
@@ -76,5 +76,6 @@
         <item name="android:textColor">#fff</item>
         <item name="android:textSize">13dp</item>
         <item name="android:gravity">center</item>
+        <item name="android:background">@drawable/icon_bg</item>
     </style>
 </resources>

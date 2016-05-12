@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorPrimary">#323453</color>
+    <color name="colorPrimaryDark">#282942</color>
     <color name="colorAccent">#03A9F4</color>
 
     <!-- Colors for Calendar view -->
@@ -10,7 +10,7 @@
     <color name="calendar_text_current_day">#ffffff</color>
     <color name="calendar_text_past_day">#6c000000</color>
     <color name="calendar_text_day">#000000</color>
-    <color name="calendar_header_day_background">#3F51B5</color>
+    <color name="calendar_header_day_background">#323453</color>
     <color name="calendar_divider_color">#F3F3F3</color>
     <color name="calendar_circle_current_color">#03A9F4</color>
     <color name="calendar_circle_other_color">#dee1e2</color>
@@ -19,12 +19,34 @@
 
 
     <!-- Alarm Color -->
-    <color name="moren">#3F51B5</color>
+    <color name="moren">#3f51b5</color>
     <color name="luolelv">#009688</color>
     <color name="yaoyanhuang">#F5A623</color>
     <color name="fanqiehong">#ff0000</color>
     <color name="didiaohui">#607d88</color>
     <color name="juzihong">#E64A19</color>
     <color name="shenkonglan">#00537F</color>
+
+    <!--<color name="light_grey">#8C9CA4</color>-->
+    <!--<color name="white">#FFFFFF</color>-->
+    <!--<color name="divider_color">#DBDBDB</color>-->
+    <!--<color name="edge_color">#FFFFFF</color>-->
+    <!--<color name="fab">#F19BA2</color>-->
+    <!--<color name="fab_highlight">#CB747B</color>-->
+    <!--<color name="blue">#323453</color>-->
+    <!--<color name="green">#4E8186</color>-->
+
+    <!--<color name="statusbar">#282942</color>-->
+    <!--<color name="statusbar2">#3E676B</color>-->
+    <!--<color name="text_primary">#727272</color>-->
+    <!--<color name="black">#000000</color>-->
+    <!--<color name="fab2">#DC8F9A</color>-->
+    <!--<color name="splash1">#F19BA2</color>-->
+    <!--<color name="splash2">#323453</color>-->
+    <!--<color name="splash3">#649692</color>-->
+    <!--<color name="splash4">#C68C94</color>-->
+
+    <!--<color name="fire_end_color">#E89183</color>-->
+    <!--<color name="fire_start_color">#FCFBEB</color>-->
 
 </resources>

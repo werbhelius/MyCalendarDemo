@@ -16,7 +16,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentLeft="true"
-            android:background="@null"
+            android:background="@drawable/icon_bg"
             android:src="@drawable/ic_keyboard_backspace_white_24dp" />
 
         <TextView
@@ -34,7 +34,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_alignParentRight="true"
-            android:background="@null"
+            android:background="@drawable/icon_bg"
             android:src="@drawable/ic_delete_white_24dp" />
 
     </RelativeLayout>
