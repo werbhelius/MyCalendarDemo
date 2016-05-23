@@ -183,10 +183,6 @@ public class AddScheduleActivity extends AppCompatActivity {
         //设置是否全天
         if (isAllDay) {
             alarmBean.setIsAllday(1);
-            alarmBean.setStartTimeHour(0);
-            alarmBean.setStartTimeMinute(0);
-            alarmBean.setEndTimeHour(24);
-            alarmBean.setEndTimeMinute(0);
         } else {
             alarmBean.setIsAllday(0);
         }
@@ -200,14 +196,24 @@ public class AddScheduleActivity extends AppCompatActivity {
 
         //设置开始时间
         if (alarm_start_time.getText().toString().equals("选择开始时间")) {
-            alarmBean.setStartTimeHour(getToDay().get(Calendar.HOUR_OF_DAY));
-            alarmBean.setStartTimeMinute(getToDay().get(Calendar.MINUTE));
+            if(isAllDay){
+                alarmBean.setStartTimeHour(0);
+                alarmBean.setStartTimeMinute(0);
+            }else {
+                alarmBean.setStartTimeHour(getToDay().get(Calendar.HOUR_OF_DAY));
+                alarmBean.setStartTimeMinute(getToDay().get(Calendar.MINUTE));
+            }
         }
 
         //设置结束时间
         if (alarm_end_time.getText().toString().equals("选择结束时间")) {
-            alarmBean.setEndTimeHour(getToDay().get(Calendar.HOUR_OF_DAY) + 1);
-            alarmBean.setEndTimeMinute(getToDay().get(Calendar.MINUTE));
+            if(isAllDay){
+                alarmBean.setEndTimeHour(23);
+                alarmBean.setEndTimeMinute(59);
+            }else {
+                alarmBean.setEndTimeHour(getToDay().get(Calendar.HOUR_OF_DAY) + 1);
+                alarmBean.setEndTimeMinute(getToDay().get(Calendar.MINUTE));
+            }
         }
 
         //设置提醒时间
@@ -285,6 +291,9 @@ public class AddScheduleActivity extends AppCompatActivity {
             alarm_description.setText(bean.getDescription());
             alarm_local.setText(bean.getLocal());
             alarm_replay.setText(bean.getReplay());
+//            alarm_date.setText(DateHelper.getScheduleDate(bean));
+//            alarm_start_time.setText(DateHelper.getStartTime(bean));
+//            alarm_end_time.setText(DateHelper.getEndTime(bean));
             insert_update_title.setText("修改活动");
             //动态改变颜色
             int colorId = ColorUtils.getColorFromStr(bean.getAlarmColor());

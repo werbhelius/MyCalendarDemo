@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import com.werb.mycalendardemo.AlarmBean;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 /**
@@ -79,7 +80,43 @@ public class AlarmDBSupport {
     }
 
     /**
-     * 按照 id 查找
+     * 按照日期查找
+     * @return
+     */
+    public List<Object> getDataByDay(Calendar calendar){
+        List<Object> beanList = new ArrayList<>();
+        Cursor cursor = db.rawQuery("select * from alarmlist where year=? and month=? and day=?",
+                new String[]{calendar.get(Calendar.YEAR)+"",calendar.get(Calendar.MONTH)+"",calendar.get(Calendar.DAY_OF_MONTH)+""});
+        if(cursor.moveToFirst()){
+            do{
+                AlarmBean bean = new AlarmBean();
+                bean.setId(cursor.getInt(0));
+                bean.setTitle(cursor.getString(1));
+                bean.setIsAllday(cursor.getInt(2));
+                bean.setIsVibrate(cursor.getInt(3));
+                bean.setYear(cursor.getInt(4));
+                bean.setMonth(cursor.getInt(5));
+                bean.setDay(cursor.getInt(6));
+                bean.setStartTimeHour(cursor.getInt(7));
+                bean.setStartTimeMinute(cursor.getInt(8));
+                bean.setEndTimeHour(cursor.getInt(9));
+                bean.setEndTimeMinute(cursor.getInt(10));
+                bean.setAlarmTime(cursor.getString(11));
+                bean.setAlarmColor(cursor.getString(12));
+                bean.setAlarmTonePath(cursor.getString(13));
+                bean.setLocal(cursor.getString(14));
+                bean.setDescription(cursor.getString(15));
+                bean.setReplay(cursor.getString(16));
+
+                beanList.add(bean);
+            }while (cursor.moveToNext());
+        }
+        cursor.close();
+        return beanList;
+    }
+
+    /**
+     * 按照id查找
      * @return
      */
     public AlarmBean getDataById(int id){

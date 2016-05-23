@@ -26,5 +26,5 @@ public abstract class BasePager {
      */
     public abstract View initView();
 
-    public void initData(List<CalendarEvent> eventList){};
+    public void initData(List<CalendarEvent> eventList){}
 }

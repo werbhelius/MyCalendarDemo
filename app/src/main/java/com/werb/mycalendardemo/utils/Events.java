@@ -35,6 +35,13 @@ public class Events {
     }
 
     /**
+     * 回到今天时间
+     */
+    public static class GoBackToDay{
+
+    }
+
+    /**
      * Calendar的滑动事件
      */
     public static class CalendarScrolledEvent {

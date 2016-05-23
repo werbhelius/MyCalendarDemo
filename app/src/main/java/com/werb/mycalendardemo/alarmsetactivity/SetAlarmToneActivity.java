@@ -71,8 +71,8 @@ public class SetAlarmToneActivity extends AppCompatActivity {
                     mediaPlayer.reset();
                 }
                 try {
-                    mediaPlayer.setVolume(0.2f, 0.2f);
                     mediaPlayer.setDataSource(SetAlarmToneActivity.this, ringtoneUri);
+                    mediaPlayer.setVolume(1f, 1f);
                     mediaPlayer.setAudioStreamType(AudioManager.STREAM_ALARM);
                     mediaPlayer.setLooping(false);
                     mediaPlayer.prepare();

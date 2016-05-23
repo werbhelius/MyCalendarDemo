@@ -1,12 +1,13 @@
 package com.werb.mycalendardemo.models;
 
+import java.io.Serializable;
 import java.util.Calendar;
 
 /**
  * 日历事件接口
  */
 
-public interface CalendarEvent {
+public interface CalendarEvent extends Serializable {
 
     int getId();//event_id
 

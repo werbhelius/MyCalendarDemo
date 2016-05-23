@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group>
+        <item
+            android:id="@+id/schedule"
+            android:checkable="true"
+            android:icon="@drawable/ic_schedule_grey_900_24dp"
+            android:title="Schedule" />
+
+        <item
+            android:id="@+id/day"
+            android:checkable="true"
+            android:icon="@drawable/ic_today_grey_900_24dp"
+            android:title="Day" />
+
+        <item
+            android:id="@+id/week"
+            android:checkable="true"
+            android:icon="@drawable/ic_receipt_grey_900_24dp"
+            android:title="Week" />
+        <item
+            android:id="@+id/aboutMe"
+            android:checkable="true"
+            android:icon="@drawable/ic_android_grey_900_24dp"
+            android:title="About Me" />
+    </group>
+</menu>

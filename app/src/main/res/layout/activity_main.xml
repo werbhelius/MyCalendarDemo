@@ -100,11 +100,12 @@
     <!-- 侧滑菜单布局-->
     <android.support.design.widget.NavigationView
         android:id="@+id/left_draw"
-        android:layout_width="250dp"
+        android:layout_width="300dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:background="#fff"
-        app:headerLayout="@layout/left_draw_header">
+        app:headerLayout="@layout/left_draw_header"
+        app:menu="@menu/left_draw_list">
 
     </android.support.design.widget.NavigationView>
 </android.support.v4.widget.DrawerLayout>

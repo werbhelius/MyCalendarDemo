@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_width="0dp"
+    android:layout_weight="1"
+    android:layout_height="50dp"
+    android:layout_marginBottom="2dp"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="3dp"
+        android:text="12"
+        android:textSize="15sp"
+        android:gravity="center_horizontal"
+        android:textColor="#eb212121"/>
+
+    <TextView
+        android:id="@+id/week"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="周四"
+        android:layout_below="@+id/day"
+        android:layout_marginLeft="15dp"
+        android:textSize="10sp"
+        android:gravity="center_horizontal"
+        android:layout_marginBottom="3dp"/>
+</RelativeLayout>

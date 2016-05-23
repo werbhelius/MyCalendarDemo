@@ -2,6 +2,8 @@ package com.werb.mycalendardemo;
 
 import android.annotation.TargetApi;
 import android.app.AlertDialog;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -27,10 +29,9 @@ import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RFACLabelItem
 import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RapidFloatingActionContentLabelList;
 import com.werb.mycalendardemo.alarmremind.SendAlarmBroadcast;
 import com.werb.mycalendardemo.customview.calendar.CalendarView;
-import com.werb.mycalendardemo.database.AlarmDBSupport;
+import com.werb.mycalendardemo.fragment.ContentFragment;
 import com.werb.mycalendardemo.models.BaseCalendarEvent;
 import com.werb.mycalendardemo.models.CalendarEvent;
-import com.werb.mycalendardemo.pager.HomePager;
 import com.werb.mycalendardemo.utils.BusProvider;
 import com.werb.mycalendardemo.utils.CalendarManager;
 import com.werb.mycalendardemo.utils.ColorUtils;
@@ -100,12 +101,11 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
     //回到今天
     @OnClick(R.id.go_today)
     void goToday() {
-        homePager.agenda_view.getAgendaListView().scrollToCurrentDate(CalendarManager.getInstance().getToday());
+//        homePager.agenda_view.getAgendaListView().scrollToCurrentDate(CalendarManager.getInstance().getToday());
+        BusProvider.getInstance().send(new Events.GoBackToDay());
         calendar_view.scrollToDate(CalendarManager.getInstance().getToday(), CalendarManager.getInstance().getWeeks());
     }
 
-    private HomePager homePager;
-    private AlarmDBSupport support;
     private boolean isAllowAlert = false;
 
     @Override
@@ -121,12 +121,12 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
         initFab();
 
         //第一次进入初始化数据
-        support = new AlarmDBSupport(getApplicationContext());
-        List<CalendarEvent> eventList = new ArrayList<>();
-        List<AlarmBean> alllist = support.getAll();
-        mockList(eventList, alllist);
-        System.out.println("---onCreate---" + eventList.size());
-        homePager.initData(eventList);
+//        support = new AlarmDBSupport(getApplicationContext());
+//        eventList = new ArrayList<>();
+//        List<AlarmBean> alllist = support.getAll();
+//        mockList(eventList, alllist);
+//        System.out.println("---onCreate---" + eventList.size());
+//        homePager.initData(eventList);
 
 
         //弹窗权限验证
@@ -181,9 +181,16 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
         // CalendarView 初始化,完成布局的初始化，数据的绑定,日期的显示
         calendar_view.init(CalendarManager.getInstance(this), getResources().getColor(mCalendarDayTextColor), getResources().getColor(mCalendarCurrentDayColor), getResources().getColor(mCalendarPastDayTextColor));
 
-        //填充 HomePager
-        homePager = new HomePager(MainActivity.this);
-        main_frame.addView(homePager.mRootView);
+        //填充 Fragment
+        FragmentManager manager =getFragmentManager();
+
+        FragmentTransaction transaction = manager.beginTransaction();
+
+        ContentFragment fragment = new ContentFragment();
+
+        transaction.replace(R.id.main_frame, fragment, "CONTENT_FRAGMENT");
+
+        transaction.commit();
 
     }
 
@@ -269,7 +276,7 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        support.deactivate();
+//        support.deactivate();
     }
 
     @TargetApi(Build.VERSION_CODES.M)
@@ -343,4 +350,18 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
         }
 
     }
+
+    /**
+     * 得到侧滑菜单
+     */
+    public NavigationView getNavigationView(){
+        return mNavigationView;
+    }
+    /**
+     * 得到DrawerLayout
+     */
+    public DrawerLayout getDrawerLayout(){
+        return mDrawerLayout;
+    }
+
 }

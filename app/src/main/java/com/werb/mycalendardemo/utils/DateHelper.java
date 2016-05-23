@@ -2,9 +2,11 @@ package com.werb.mycalendardemo.utils;
 
 import android.content.Context;
 
+import com.werb.mycalendardemo.AlarmBean;
 import com.werb.mycalendardemo.R;
 import com.werb.mycalendardemo.models.WeekItem;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -115,6 +117,58 @@ public class DateHelper {
         }
 
         return (sb.toString());
+    }
+
+    /**
+     * 返回开始结束时间字符串
+     * @param bean
+     * @return
+     */
+    public static String getStartAndEndTime(AlarmBean bean) {
+        Calendar startCalendar = Calendar.getInstance();
+        startCalendar.set(Calendar.HOUR_OF_DAY, bean.getStartTimeHour());
+        startCalendar.set(Calendar.MINUTE, bean.getStartTimeMinute());
+        Calendar endCalendar = Calendar.getInstance();
+        endCalendar.set(Calendar.HOUR_OF_DAY, bean.getEndTimeHour());
+        endCalendar.set(Calendar.MINUTE, bean.getEndTimeMinute());
+
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        String startTime = df.format(startCalendar.getTime());
+        String endTime = df.format(endCalendar.getTime());
+        String startAndEndTime = startTime + "-" + endTime;
+        return startAndEndTime;
+    }
+
+    /**
+     * 返回日程日期字符串
+     */
+    public static String getScheduleDate(AlarmBean bean){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(bean.getYear(),bean.getMonth(),bean.getDay());
+        SimpleDateFormat df = new SimpleDateFormat("yyyy年MM月dd日  EE");
+        return df.format(calendar.getTime());
+    }
+
+    /**
+     * 返回日程开始时间的单个字符串
+     */
+    public static String getStartTime(AlarmBean bean){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, bean.getStartTimeHour());
+        calendar.set(Calendar.MINUTE, bean.getStartTimeMinute());
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        return "开始时间:  " +df.format(calendar.getTime());
+    }
+
+    /**
+     * 返回日程结束时间的单个字符串
+     */
+    public static String getEndTime(AlarmBean bean){
+        Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.HOUR_OF_DAY, bean.getEndTimeHour());
+        calendar.set(Calendar.MINUTE, bean.getEndTimeMinute());
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        return "结束时间:  " + df.format(calendar.getTime());
     }
 
 
