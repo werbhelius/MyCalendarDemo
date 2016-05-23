@@ -8,11 +8,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.werb.mycalendardemo.R;
-import com.werb.mycalendardemo.models.CalendarEvent;
 import com.werb.mycalendardemo.utils.BusProvider;
 import com.werb.mycalendardemo.utils.Events;
-
-import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -43,7 +40,7 @@ public class AboutMePager extends BasePager implements View.OnClickListener {
     }
 
     @Override
-    public void initData(List<CalendarEvent> eventList) {
+    public void initData() {
         about_bg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

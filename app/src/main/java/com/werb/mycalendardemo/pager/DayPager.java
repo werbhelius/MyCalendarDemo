@@ -12,7 +12,6 @@ import com.werb.mycalendardemo.R;
 import com.werb.mycalendardemo.ScheduleDetailActivity;
 import com.werb.mycalendardemo.customview.pageradapter.RecycleAdapter;
 import com.werb.mycalendardemo.database.AlarmDBSupport;
-import com.werb.mycalendardemo.models.CalendarEvent;
 import com.werb.mycalendardemo.utils.BusProvider;
 import com.werb.mycalendardemo.utils.Events;
 
@@ -55,7 +54,7 @@ public class DayPager extends BasePager {
     }
 
     @Override
-    public void initData(List<CalendarEvent> eventList) {
+    public void initData() {
 
         chooseDayFromClick();
 
@@ -64,43 +63,16 @@ public class DayPager extends BasePager {
         Calendar calendar = Calendar.getInstance();
         calendar.setTimeInMillis(System.currentTimeMillis());
         list= new AlarmDBSupport(mActivity).getDataByDay(calendar);
-        RecycleAdapter dayPagerAdapter = new RecycleAdapter("dayPager", list,mActivity);
-        recycle_view.setAdapter(dayPagerAdapter);
 
-        day.setText(calendar.get(Calendar.DAY_OF_MONTH)+"");
+        setDateToShow(calendar,list);
 
-        //设置星期格式
-        SimpleDateFormat dayWeekFormatter = new SimpleDateFormat("E");
-        String weekStr = dayWeekFormatter.format(calendar.getTimeInMillis());
-        week.setText(weekStr);
-
-        if(list.size()==0){
-            haveOrNot.setText("还没有日程信息，点击加号添加");
-        }else {
-            haveOrNot.setText("这是您今日的日程信息");
-        }
-
-        //Item 点击事件
-        dayPagerAdapter.setOnMyItemListener(new RecycleAdapter.MyItemClickListener() {
+        recycle_view.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
-            public void onItemClick(View view, int position) {
-                TextView alarm_id = (TextView) view.findViewById(R.id.Alarm_id);
-                Toast.makeText(mActivity,position+"-"+alarm_id.getText().toString(),Toast.LENGTH_SHORT).show();
-                if(!alarm_id.getText().toString().equals("0")){
-                    Intent intent = new Intent(mActivity, ScheduleDetailActivity.class);
-                    intent.putExtra("id",alarm_id.getText().toString());
-                    mActivity.startActivity(intent);
-                    mActivity.finish();
-                }
+            public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
+                BusProvider.getInstance().send(new Events.AgendaListViewTouchedEvent());
             }
         });
 
-       recycle_view.addOnScrollListener(new RecyclerView.OnScrollListener() {
-           @Override
-           public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
-               BusProvider.getInstance().send(new Events.AgendaListViewTouchedEvent());
-           }
-       });
 
     }
 
@@ -115,39 +87,62 @@ public class DayPager extends BasePager {
                         //Day日期点击事件
                         Events.DayClickedEvent clickedEvent = (Events.DayClickedEvent) event;
                         list = new AlarmDBSupport(mActivity).getDataByDay(clickedEvent.getCalendar());
+                        setDateToShow(clickedEvent.getCalendar(),list);
 
-                        day.setText(clickedEvent.getCalendar().get(Calendar.DAY_OF_MONTH)+"");
 
-                        //设置星期格式
-                        SimpleDateFormat dayWeekFormatter = new SimpleDateFormat("E");
-                        String weekStr = dayWeekFormatter.format(clickedEvent.getCalendar().getTimeInMillis());
-                        week.setText(weekStr);
+                    }else if(event instanceof Events.GoBackToDay){
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.setTimeInMillis(System.currentTimeMillis());
+                        list= new AlarmDBSupport(mActivity).getDataByDay(calendar);
+                        setDateToShow(calendar,list);
 
-                        if(list.size()==0){
-                            haveOrNot.setText("还没有日程信息，点击加号添加");
-                        }else {
-                            haveOrNot.setText("这是您今日的日程信息");
-                        }
-
-                        RecycleAdapter dayPagerAdapter = new RecycleAdapter("dayPager", list,mActivity);
-                        recycle_view.setAdapter(dayPagerAdapter);
-                        dayPagerAdapter.notifyDataSetChanged();
-
-                        //Item 点击事件
-                        dayPagerAdapter.setOnMyItemListener(new RecycleAdapter.MyItemClickListener() {
-                            @Override
-                            public void onItemClick(View view, int position) {
-                                TextView alarm_id = (TextView) view.findViewById(R.id.Alarm_id);
-                                Toast.makeText(mActivity,position+"-"+alarm_id.getText().toString(),Toast.LENGTH_SHORT).show();
-                                if(!alarm_id.getText().toString().equals("0")){
-                                    Intent intent = new Intent(mActivity, ScheduleDetailActivity.class);
-                                    intent.putExtra("id",alarm_id.getText().toString());
-                                    mActivity.startActivity(intent);
-                                    mActivity.finish();
-                                }
-                            }
-                        });
                     }
+
                 });
+    }
+
+    /**
+     * 设置显示的日期
+     */
+    private void setDateToShow(Calendar calendar ,List list){
+        day.setText(calendar.get(Calendar.DAY_OF_MONTH)+"");
+
+        //设置星期格式
+        SimpleDateFormat dayWeekFormatter = new SimpleDateFormat("E");
+        String weekStr = dayWeekFormatter.format(calendar.getTimeInMillis());
+        week.setText(weekStr);
+
+        if(list.size()==0){
+            haveOrNot.setText("还没有日程信息，点击加号添加");
+        }else {
+            haveOrNot.setText("这是您今日的日程信息");
+        }
+
+        RecycleAdapter dayPagerAdapter = new RecycleAdapter("dayPager", list,mActivity);
+        recycle_view.setAdapter(dayPagerAdapter);
+        dayPagerAdapter.notifyDataSetChanged();
+
+        //Item 点击事件
+        itemClick(dayPagerAdapter);
+    }
+
+    /**
+     * listView 的Item点击事件
+     */
+    private void itemClick(RecycleAdapter adapter){
+        //Item 点击事件
+        adapter.setOnMyItemListener(new RecycleAdapter.MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                TextView alarm_id = (TextView) view.findViewById(R.id.Alarm_id);
+                Toast.makeText(mActivity,position+"-"+alarm_id.getText().toString(),Toast.LENGTH_SHORT).show();
+                if(!alarm_id.getText().toString().equals("0")){
+                    Intent intent = new Intent(mActivity, ScheduleDetailActivity.class);
+                    intent.putExtra("id",alarm_id.getText().toString());
+                    mActivity.startActivity(intent);
+//                    mActivity.finish();
+                }
+            }
+        });
     }
 }

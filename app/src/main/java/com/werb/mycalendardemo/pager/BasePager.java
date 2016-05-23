@@ -3,10 +3,6 @@ package com.werb.mycalendardemo.pager;
 import android.app.Activity;
 import android.view.View;
 
-import com.werb.mycalendardemo.models.CalendarEvent;
-
-import java.util.List;
-
 /**
  *  Pager 页面的基类
  */
@@ -26,5 +22,5 @@ public abstract class BasePager {
      */
     public abstract View initView();
 
-    public void initData(List<CalendarEvent> eventList){}
+    public void initData(){}
 }

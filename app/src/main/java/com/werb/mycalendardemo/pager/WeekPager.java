@@ -12,7 +12,6 @@ import com.werb.mycalendardemo.R;
 import com.werb.mycalendardemo.ScheduleDetailActivity;
 import com.werb.mycalendardemo.customview.pageradapter.RecycleAdapter;
 import com.werb.mycalendardemo.database.AlarmDBSupport;
-import com.werb.mycalendardemo.models.CalendarEvent;
 import com.werb.mycalendardemo.utils.BusProvider;
 import com.werb.mycalendardemo.utils.Events;
 
@@ -50,38 +49,17 @@ public class WeekPager extends BasePager {
     }
 
     @Override
-    public void initData(List<CalendarEvent> eventList) {
+    public void initData() {
 
         chooseDayFromClick();
 
         Calendar today = Calendar.getInstance();
         today.setTimeInMillis(System.currentTimeMillis());
-        setDayAndWeek(today);
+
 
         recycle_view.setLayoutManager(new LinearLayoutManager(mActivity));
-        RecycleAdapter recycleAdapter = new RecycleAdapter("weekPager",listList,mActivity);
-        recycle_view.setAdapter(recycleAdapter);
+        setDayAndWeek(today);
 
-        if(listList.size()==0){
-            info.setText("本周还没有日程信息，点击加号添加");
-        }else {
-            info.setText("本星期的日程信息如下显示：");
-        }
-
-        //Item 点击事件
-        recycleAdapter.setOnMyItemListener(new RecycleAdapter.MyItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                TextView alarm_id = (TextView) view.findViewById(R.id.Alarm_id);
-                Toast.makeText(mActivity,position+"-"+alarm_id.getText().toString(),Toast.LENGTH_SHORT).show();
-                if(!alarm_id.getText().toString().equals("0")){
-                    Intent intent = new Intent(mActivity, ScheduleDetailActivity.class);
-                    intent.putExtra("id",alarm_id.getText().toString());
-                    mActivity.startActivity(intent);
-                    mActivity.finish();
-                }
-            }
-        });
 
         recycle_view.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
@@ -106,30 +84,13 @@ public class WeekPager extends BasePager {
                         Calendar selectDay = clickedEvent.getCalendar();
                         setDayAndWeek(selectDay);
 
-                        RecycleAdapter recycleAdapter = new RecycleAdapter("weekPager",listList,mActivity);
-                        recycle_view.setAdapter(recycleAdapter);
 
-                        if(listList.size()==0){
-                            info.setText("本周还没有日程信息，点击加号添加");
-                        }else {
-                            info.setText("本星期的日程信息如下显示：");
-                        }
-
-                        //Item 点击事件
-                        recycleAdapter.setOnMyItemListener(new RecycleAdapter.MyItemClickListener() {
-                            @Override
-                            public void onItemClick(View view, int position) {
-                                TextView alarm_id = (TextView) view.findViewById(R.id.Alarm_id);
-                                Toast.makeText(mActivity,position+"-"+alarm_id.getText().toString(),Toast.LENGTH_SHORT).show();
-                                if(!alarm_id.getText().toString().equals("0")){
-                                    Intent intent = new Intent(mActivity, ScheduleDetailActivity.class);
-                                    intent.putExtra("id",alarm_id.getText().toString());
-                                    mActivity.startActivity(intent);
-                                    mActivity.finish();
-                                }
-                            }
-                        });
+                    }else if(event instanceof Events.GoBackToDay){
+                        Calendar today = Calendar.getInstance();
+                        today.setTimeInMillis(System.currentTimeMillis());
+                        setDayAndWeek(today);
                     }
+
                 });
     }
 
@@ -151,5 +112,38 @@ public class WeekPager extends BasePager {
                 listList.add(o);
             }
         }
+
+        RecycleAdapter recycleAdapter = new RecycleAdapter("weekPager",listList,mActivity);
+        recycle_view.setAdapter(recycleAdapter);
+        recycleAdapter.notifyDataSetChanged();
+
+        if(listList.size()==0){
+            info.setText("本周还没有日程信息，点击加号添加");
+        }else {
+            info.setText("本星期的日程信息如下显示：");
+        }
+
+        //Item 点击事件
+        itemClick(recycleAdapter);
+    }
+
+    /**
+     //     * listView 的Item点击事件
+     //     */
+    private void itemClick(RecycleAdapter adapter){
+        //Item 点击事件
+        adapter.setOnMyItemListener(new RecycleAdapter.MyItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                TextView alarm_id = (TextView) view.findViewById(R.id.Alarm_id);
+                Toast.makeText(mActivity,position+"-"+alarm_id.getText().toString(),Toast.LENGTH_SHORT).show();
+                if(!alarm_id.getText().toString().equals("0")){
+                    Intent intent = new Intent(mActivity, ScheduleDetailActivity.class);
+                    intent.putExtra("id",alarm_id.getText().toString());
+                    mActivity.startActivity(intent);
+                    mActivity.finish();
+                }
+            }
+        });
     }
 }
