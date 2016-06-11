@@ -1,0 +1,14 @@
+/*
+ * 全局配置信息
+ */
+
+ext{
+    android = [compileSdkVersion: 23,
+               buildToolsVersion: "23.0.2",
+               applicationId    : "com.werb.mycalendardemo",
+               minSdkVersion    : 19,
+               targetSdkVersion : 22,
+               versionCode      : 1,
+               versionName      : "1.0"]
+
+}

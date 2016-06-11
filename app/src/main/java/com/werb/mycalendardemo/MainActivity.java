@@ -10,7 +10,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
 import android.support.design.widget.NavigationView;
-import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -30,15 +29,11 @@ import com.wangjie.rapidfloatingactionbutton.contentimpl.labellist.RapidFloating
 import com.werb.mycalendardemo.alarmremind.SendAlarmBroadcast;
 import com.werb.mycalendardemo.customview.calendar.CalendarView;
 import com.werb.mycalendardemo.fragment.ContentFragment;
-import com.werb.mycalendardemo.models.BaseCalendarEvent;
-import com.werb.mycalendardemo.models.CalendarEvent;
 import com.werb.mycalendardemo.utils.BusProvider;
 import com.werb.mycalendardemo.utils.CalendarManager;
-import com.werb.mycalendardemo.utils.ColorUtils;
 import com.werb.mycalendardemo.utils.Events;
 import com.werb.mycalendardemo.utils.PrefUtils;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -120,13 +115,6 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
         setMonthTitle();
         initFab();
 
-        //第一次进入初始化数据
-//        support = new AlarmDBSupport(getApplicationContext());
-//        eventList = new ArrayList<>();
-//        List<AlarmBean> alllist = support.getAll();
-//        mockList(eventList, alllist);
-//        System.out.println("---onCreate---" + eventList.size());
-//        homePager.initData(eventList);
 
 
         //弹窗权限验证
@@ -302,53 +290,11 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
         Calendar minDate = Calendar.getInstance();
         Calendar maxDate = Calendar.getInstance();
 
-        minDate.add(Calendar.MONTH, -5);
+        minDate.add(Calendar.MONTH, -10);
         minDate.set(Calendar.DAY_OF_MONTH, 1);
         maxDate.add(Calendar.YEAR, 1);
         //根据你传入的开始结束值，构建生成Calendar数据（各种Item，JavaBean）
         CalendarManager.getInstance(this).buildCal(minDate, maxDate, Locale.getDefault());
-    }
-
-    /**
-     * 构建数据集合
-     * @param eventList list显示的集合
-     * @param beanList 从数据库中读到的全部数据集合
-     */
-    private void mockList(List<CalendarEvent> eventList, List<AlarmBean> beanList) {
-
-        for (AlarmBean bean : beanList) {
-            Calendar startTime1 = Calendar.getInstance();
-            startTime1.set(bean.getYear(), bean.getMonth(), bean.getDay());
-            Calendar endTime1 = Calendar.getInstance();
-            endTime1.set(bean.getYear(), bean.getMonth(), bean.getDay());
-
-            boolean isAllday;
-            if (bean.getIsAllday() == 1) {
-                isAllday = true;
-            } else {
-                isAllday = false;
-            }
-
-            int colorId = ColorUtils.getColorFromStr(bean.getAlarmColor());
-
-            Calendar startCalendar = Calendar.getInstance();
-            startCalendar.set(Calendar.HOUR_OF_DAY, bean.getStartTimeHour());
-            startCalendar.set(Calendar.MINUTE, bean.getStartTimeMinute());
-            Calendar endCalendar = Calendar.getInstance();
-            endCalendar.set(Calendar.HOUR_OF_DAY, bean.getEndTimeHour());
-            endCalendar.set(Calendar.MINUTE, bean.getEndTimeMinute());
-
-            SimpleDateFormat df = new SimpleDateFormat("HH:mm");
-            String startTime = df.format(startCalendar.getTime());
-            String endTime = df.format(endCalendar.getTime());
-            String startAndEndTime = startTime + "-" + endTime;
-
-            BaseCalendarEvent event1 = new BaseCalendarEvent(bean.getId(),bean.getTitle(), bean.getDescription(), bean.getLocal(),
-                    ContextCompat.getColor(this, colorId), startTime1, endTime1, isAllday, startAndEndTime);
-            System.out.println("---" + event1.toString());
-            eventList.add(event1);
-        }
-
     }
 
     /**

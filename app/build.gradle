@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 apply plugin: 'me.tatarka.retrolambda'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.2"
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    buildToolsVersion rootProject.ext.android.buildToolsVersion
 
     defaultConfig {
-        applicationId "com.werb.mycalendardemo"
-        minSdkVersion 19
-        targetSdkVersion 23
-        versionCode 1
-        versionName "1.0"
+        applicationId rootProject.ext.android.applicationId
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
     }
     buildTypes {
         release {
