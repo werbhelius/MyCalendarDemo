@@ -77,6 +77,7 @@ public class AgendaHeaderView extends LinearLayout {
         TextView txtDayOfWeek = (TextView) findViewById(R.id.view_agenda_day_of_week);
         View circleView = findViewById(R.id.view_day_circle_selected);
 
+        //普通日期为灰色
         //list 左边日期的颜色
         txtDayOfMonth.setTextColor(getResources().getColor(R.color.calendar_text_default));
         //list 左边星期的颜色
@@ -92,6 +93,7 @@ public class AgendaHeaderView extends LinearLayout {
                     setLayoutParams(new FrameLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, dip2px(120)));
 
                     setBackground(getResources().getDrawable(imagId[i]));
+                    //每月第一天为黑色
                     //list 左边日期的颜色
                     txtDayOfMonth.setTextColor(getResources().getColor(R.color.calendar_text_day));
                     //list 左边星期的颜色
@@ -111,10 +113,10 @@ public class AgendaHeaderView extends LinearLayout {
 
 
 
-        //如果当前日期为today,则显示circleView,同时设置circleView的颜色粗细,否则就隐藏circleView
+        //如果当前日期为today,则显示为蓝色,同时设置circleView的颜色粗细,否则就隐藏circleView
         if (DateHelper.sameDate(day, today)) {
-            txtDayOfMonth.setTextColor(getResources().getColor(R.color.calendar_circle_current_color));
-            txtDayOfWeek.setTextColor(getResources().getColor(R.color.calendar_circle_current_color));
+            txtDayOfMonth.setTextColor(currentDayTextColor);
+            txtDayOfWeek.setTextColor(currentDayTextColor);
 //            circleView.setVisibility(VISIBLE);
         } else {
             circleView.setVisibility(INVISIBLE);

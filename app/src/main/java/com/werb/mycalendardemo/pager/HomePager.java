@@ -46,7 +46,7 @@ public class HomePager extends BasePager implements StickyListHeadersListView.On
     private AlarmDBSupport support;
     public AgendaAdapter agendaAdapter;
 
-    private int mAgendaCurrentDayTextColor = mActivity.getResources().getColor(R.color.calendar_text_current_day);
+    private int mAgendaCurrentDayTextColor = mActivity.getResources().getColor(R.color.calendar_agendaHead_current_color);
 
     public HomePager(Activity mActivity) {
         super(mActivity);

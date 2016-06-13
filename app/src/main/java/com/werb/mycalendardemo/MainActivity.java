@@ -158,7 +158,7 @@ public class MainActivity extends AppCompatActivity implements RapidFloatingActi
      * 初始化布局
      */
     private void initLayoutView() {
-        //初始化 CalendarView
+        //初始化 CalendarView,设置颜色
         mCalendarHeaderColor = R.color.calendar_header_day_background;
         mCalendarDayTextColor = R.color.calendar_text_day;
         mCalendarCurrentDayColor = R.color.calendar_text_current_day;
