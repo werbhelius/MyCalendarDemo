@@ -41,12 +41,7 @@ public class AboutMePager extends BasePager implements View.OnClickListener {
 
     @Override
     public void initData() {
-        about_bg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BusProvider.getInstance().send(new Events.AgendaListViewTouchedEvent());
-            }
-        });
+        about_bg.setOnClickListener(v -> BusProvider.getInstance().send(new Events.AgendaListViewTouchedEvent()));
 
         github.setOnClickListener(this);
         weibo.setOnClickListener(this);
